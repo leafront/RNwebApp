@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/tiger/Desktop/webApp/node_modules/react-native/React/Modules/RCTI18nUtil.m \
-  /Users/tiger/Desktop/webApp/node_modules/react-native/React/Modules/RCTI18nUtil.h
+  /Users/tiger/Desktop/RNwebApp/node_modules/react-native/React/Modules/RCTI18nUtil.m \
+  /Users/tiger/Desktop/RNwebApp/node_modules/react-native/React/Modules/RCTI18nUtil.h

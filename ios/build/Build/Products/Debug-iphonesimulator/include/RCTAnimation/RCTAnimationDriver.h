@@ -12,8 +12,6 @@
 
 #import <React/RCTBridgeModule.h>
 
-static CGFloat RCTSingleFrameInterval = 1.0 / 60.0;
-
 @class RCTValueAnimatedNode;
 
 NS_ASSUME_NONNULL_BEGIN

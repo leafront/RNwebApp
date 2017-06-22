@@ -14,7 +14,7 @@ import List from './component/list/main'
 
 import { StackNavigator } from 'react-navigation'
 
-const webApp = StackNavigator({
+const RNwebApp = StackNavigator({
 
   Home: { screen: Home },
 
@@ -24,4 +24,4 @@ const webApp = StackNavigator({
 
 
 
-AppRegistry.registerComponent('webApp', () => webApp);
+AppRegistry.registerComponent('RNwebApp', () => RNwebApp);

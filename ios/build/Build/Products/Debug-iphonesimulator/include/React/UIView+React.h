@@ -72,11 +72,11 @@
 - (void)reactAddControllerToClosestParent:(UIViewController *)controller;
 
 /**
- * Focus manipulation.
+ * Responder overrides - to be deprecated.
  */
-- (void)reactFocus;
-- (void)reactFocusIfNeeded;
-- (void)reactBlur;
+- (void)reactWillMakeFirstResponder;
+- (void)reactDidMakeFirstResponder;
+- (BOOL)reactRespondsToTouch:(UITouch *)touch;
 
 #if RCT_DEV
 

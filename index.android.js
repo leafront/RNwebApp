@@ -12,7 +12,7 @@ import {
   View
 } from 'react-native';
 
-export default class webApp extends Component {
+export default class RNwebApp extends Component {
   render() {
     return (
       <View style={styles.container}>
@@ -50,4 +50,4 @@ const styles = StyleSheet.create({
   },
 });
 
-AppRegistry.registerComponent('webApp', () => webApp);
+AppRegistry.registerComponent('RNwebApp', () => RNwebApp);
