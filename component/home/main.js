@@ -17,10 +17,11 @@ const winWidth = Dimensions.get('window').width
 
 import Menu from './menu'
 
+import Topline  from './topline'
+
+import HotLogo from './hotLogo'
+
 export default class Home extends Component {
-  static navigationOptions = {
-    title: '首页',
-  }
   constructor(props) {
     super(props);
     this.state = {
@@ -31,9 +32,8 @@ export default class Home extends Component {
 
     this.getBanner()
   }
-  async getBanner() {
-
-    const data = await fetch(
+  getBanner() {
+     fetch(
        'https://m.lechebang.com/gateway/mkt/getShowcaseModules' , {
         method: 'POST',
         headers:{
@@ -77,11 +77,13 @@ export default class Home extends Component {
 
 
     return (
-        <View>
+        <View style={styles.container}>
           <Swiper style={styles.wrapper} showsButtons={false} height={130} >
             {banner}
          </Swiper>
          <Menu/>
+         <Topline/>
+         <HotLogo/>
         </View>
     )
   }
@@ -89,7 +91,7 @@ export default class Home extends Component {
 
 var styles = StyleSheet.create({
   container: {
-    flexDirection: 'row'
+    backgroundColor:'#fff'
   },
   wrapper: {
     height: 130
