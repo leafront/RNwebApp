@@ -29,11 +29,11 @@ const Topline = () => {
 
 var styles = StyleSheet.create({
   topLine: {
-    marginTop:20,
     height: 40,
     borderTopWidth: 1/ratio,
     borderColor: '#f1f1f1',
     flexDirection: 'row',
+    backgroundColor:'#fff'
   },
   topLineImg:{
     width:35,
@@ -43,9 +43,8 @@ var styles = StyleSheet.create({
   scrollTxt: {
     textAlign: 'center',
     lineHeight:40,
-    fontSize:12,
-    paddingLeft:20,
-    paddingRight:20
+    fontSize:11,
+    paddingRight:10
   }
 })
 

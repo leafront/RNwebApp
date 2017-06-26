@@ -14,21 +14,17 @@ import Swiper from 'react-native-swiper'
 
 const winWidth = Dimensions.get('window').width
 
-
-import Menu from './menu'
-
-import Topline  from './topline'
-
-import HotLogo from './hotLogo'
-
-export default class Home extends Component {
+class Banner extends Component {
   constructor(props) {
     super(props);
     this.state = {
       dataSource: []
     }
   }
-  componentDidMount(){
+  static navigationOptions = {
+    header: null
+  }
+  componentWillMount(){
 
     this.getBanner()
   }
@@ -36,7 +32,7 @@ export default class Home extends Component {
      fetch(
        'https://m.lechebang.com/gateway/mkt/getShowcaseModules' , {
         method: 'POST',
-        headers:{
+        headers: {
           'Content-Type':'application/x-www-form-urlencoded'
         },
         body: JSON.stringify({
@@ -65,7 +61,6 @@ export default class Home extends Component {
   }
   render() {
 
-    const { navigate } = this.props.navigation
     const bannerList = this.state.dataSource
     const banner = bannerList.map((item,index) => {
       return (
@@ -75,26 +70,30 @@ export default class Home extends Component {
       )
     })
 
-
     return (
-        <View style={styles.container}>
-          <Swiper style={styles.wrapper} showsButtons={false} height={130} >
+        <View>
+          <Swiper
+          style={styles.wrapper}
+          showsButtons={false}
+          height={130}
+          paginationStyle = {styles.pagination}
+          >
             {banner}
          </Swiper>
-         <Menu/>
-         <Topline/>
-         <HotLogo/>
         </View>
     )
   }
 }
 
+export default Banner
+
 var styles = StyleSheet.create({
-  container: {
-    backgroundColor:'#fff'
+  pagination: {
+    top:120
   },
   wrapper: {
-    height: 130
+    height: 130,
+    backgroundColor:'#ccc'
   },
   thumbnail: {
     width:winWidth,
@@ -102,6 +101,7 @@ var styles = StyleSheet.create({
   },
   slide: {
     flexDirection: 'row',
-    height:130
+    height:130,
+
   }
 })

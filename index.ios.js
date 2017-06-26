@@ -1,3 +1,4 @@
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -8,9 +9,9 @@
   AppRegistry
  } from 'react-native'
 
-import Home from './component/home/main'
+import Home from './src/container/index'
 
-import List from './component/list/main'
+import City from './src/container/city'
 
 import { StackNavigator } from 'react-navigation'
 
@@ -18,7 +19,7 @@ const RNwebApp = StackNavigator({
 
   Home: { screen: Home },
 
-  List: { screen: List }
+  City: { screen: City }
 
 })
 

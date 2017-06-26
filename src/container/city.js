@@ -7,8 +7,15 @@ import {
 
 export default class Home extends Component {
   static navigationOptions = {
-    title: '列表',
-  };
+    title: '当前城市列表',
+    headerTitleStyle: {
+      color: '#333',
+      fontSize: 18
+    },
+    headerStyle: {
+      backgroundColor:'#fff'
+    }
+  }
   render() {
     return (
       <View style={styles.container}>

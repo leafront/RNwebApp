@@ -13,7 +13,7 @@ const winWidth = Dimensions.get('window').width
 
 const Menu =  () => {
 
-    const menuImg = [[
+    const menuImg = [
       {
         "name":"4S店保养",
         "imgUrl":'https://ocpvgmewj.qnssl.com/5adbeef9-0b5b-4bb9-b99c-dc7ac05ec9b0.png'
@@ -30,9 +30,7 @@ const Menu =  () => {
       },{
         "name":'加油',
         "imgUrl": 'https://ocpvgmewj.qnssl.com/d2e91ea8-8180-485a-a23f-96e7e6cbd589.png',
-      }
-
-    ],[
+      },
 
         {
           "name":'洗车',
@@ -53,9 +51,8 @@ const Menu =  () => {
         }
 
     ]
-  ]
 
-    const menuList1 = menuImg[0].map((item,index) => {
+    const menuList = menuImg.map((item,index) => {
 
       return (
           <View style={styles.menuList} key = {index}>
@@ -68,27 +65,13 @@ const Menu =  () => {
 
     })
 
-    const menuList2 = menuImg[1].map((item,index) => {
-
-      return (
-        <View style={styles.menuList} key = {index}>
-         <Image source={{url:item.imgUrl}} style={styles.menuImg}/>
-         <Text style={styles.meunTxt}>
-           {item.name}
-         </Text>
-        </View>
-      )
-    })
     return (
       <View>
         <View style={styles.menuWraper}>
 
-         {menuList1}
+         {menuList}
         </View>
-        <View style={styles.menuWraper}>
 
-         {menuList2}
-        </View>
       </View>
 
     )
@@ -98,15 +81,16 @@ const Menu =  () => {
 var styles = StyleSheet.create({
   menuWraper:{
 
-    flexDirection: 'row'
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    backgroundColor:'#fff',
+    paddingBottom:20,
   },
   menuList: {
 
     width: winWidth * 0.2,
 
-    flexDirection: 'column',
-
-    paddingTop:10,
+    paddingTop:20,
 
     paddingLeft: 5,
 
@@ -114,7 +98,6 @@ var styles = StyleSheet.create({
 
   },
   meunTxt:{
-    width: winWidth * 0.2 - 10,
     flexDirection: 'column',
     textAlign: 'center',
     marginTop:10,
@@ -126,7 +109,7 @@ var styles = StyleSheet.create({
     flexDirection: 'column',
     width: winWidth * 0.2 - 10,
 
-    height: winWidth * 0.2 -10
+    height: winWidth * 0.2 - 10
   }
 })
 
