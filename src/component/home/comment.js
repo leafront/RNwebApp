@@ -42,61 +42,11 @@ class Comment extends Component {
 
     super(props)
 
-    this.state = {
-      comment: []
-    }
-  }
-
-  componentWillMount() {
-
-    this.getComemntList()
-
-  }
-
-  getComemntList () {
-    fetch(
-      'https://m.lechebang.com/gateway/ord_comment/getOrderHyperCommentList' , {
-       method: 'POST',
-       headers: {
-         'Content-Type':'application/x-www-form-urlencoded'
-       },
-       body: JSON.stringify({
-         "minResultCount":5,
-         "page":{
-           "currentPage":1,
-           "pageSize":5
-         },
-         "queryType":1,
-         "recommended":true,
-         "appCode":101,
-         "lcb_client_id":"4b1a5e1f-c146-46ca-9189-41cbf0827f26",
-         "lcb_request_id":"11dc84af-a7f8-440e-af65-658297aedc5a",
-         "lcb_h5_v":"4.0.2"
-       })
-     })
-     .then((response) => {
-       if (response.ok) {
-           return response.json();
-       }
-     }).then((json) => {
-
-       if(json && json.msg == "ok"){
-
-        this.setState({
-          comment: json.result.lists
-        })
-       }
-     }).catch((error) => {
-       console.error(error)
-     })
-
   }
   render () {
 
-    const comment = this.state.comment
-
-
-
+    const comment = this.props.comment
+    
     const commentItem = comment.map((item,index) => {
 
       return (
@@ -204,7 +154,7 @@ var styles = StyleSheet.create({
     color:'#999',
     fontSize:12
   },
-  carText:{
+  redText:{
     color:'#fa5a4b',
     fontSize:12
   },

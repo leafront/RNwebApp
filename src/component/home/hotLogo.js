@@ -65,6 +65,8 @@ class HotLogo extends Component {
           </Text>
         </View>
 
+        
+
       )
 
     })
