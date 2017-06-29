@@ -32,7 +32,7 @@ export default class City extends Component {
   }
   static navigationOptions = ({navigation})=>({
     title: '选品牌',
-    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{height: 20,width:20,marginLeft:10}}/></TouchableOpacity>,
+    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
     headerTitleStyle: {
       color: '#333',
       fontSize: 16
