@@ -71,17 +71,10 @@ class HotLogo extends Component {
     const navigate = this.props.navigate
 
     return (
-
-      <View style={styles.hotLogo}>
+      <View>
         <View style={styles.title}>
-          <Text>热门保养</Text>
-          <TouchableOpacity
-            onPress={ () => navigate('City') }>
-              <Text style={styles.hotBtn}>添加爱车</Text>
-          </TouchableOpacity>
+          <Text style={styles.brandTxt}>热门品牌</Text>
         </View>
-
-
         <View style={styles.pic}>
           {hotLogoList}
         </View>
@@ -95,20 +88,14 @@ class HotLogo extends Component {
 
 
 var styles = StyleSheet.create({
-  hotLogo: {
-      backgroundColor:'#fff',
-      marginTop: 10
-
+  title: {
+    paddingLeft: 10,
+    paddingRight: 10
   },
-  title:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
-    paddingLeft:10,
-    paddingRight:10,
-
-    height:40
-
+  brandTxt: {
+    lineHeight:20,
+    fontSize:12,
+    color:'#999'
   },
   pic: {
 
@@ -118,7 +105,9 @@ var styles = StyleSheet.create({
 
     flexWrap: 'wrap',
 
-    width: winWidth
+    width: winWidth,
+
+    backgroundColor:'#fff'
 
   },
 
@@ -127,10 +116,6 @@ var styles = StyleSheet.create({
     width: winWidth * 0.15,
     height: winWidth * 0.15
 
-  },
-  hotBtn: {
-    color:'#ffa028',
-    fontSize: 14
   },
   item: {
 

@@ -18,8 +18,10 @@ import { StackNavigator } from 'react-navigation'
 const RNwebApp = StackNavigator({
 
   Home: { screen: Home },
-
   City: { screen: City }
+
+
+
 
 })
 
