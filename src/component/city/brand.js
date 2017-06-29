@@ -6,6 +6,7 @@ import {
   View,
   Button,
   Image,
+  PixelRatio,
   Dimensions,
   TouchableOpacity,
   Alert
@@ -13,7 +14,10 @@ import {
 
 const winWidth = Dimensions.get('window').width
 
-class HotLogo extends Component {
+const ratio = PixelRatio.get()
+
+
+class Brand extends Component {
   constructor(props) {
     super(props)
 
@@ -52,99 +56,89 @@ class HotLogo extends Component {
 
     const hotLogo = this.state.hotLogo
 
+    const brandList = this.props.brandList
 
-    const hotLogoList = hotLogo.map((item,index) => {
+    const navigate = this.props.navigate
+
+    const listItem = brandList.map((item,index) => {
 
       return (
+        <View key = {index}>
+          <View style={styles.title}>
+            <Text style={styles.letter}>{item.pinYin}</Text>
+          </View>
+          <View style={styles.itemWraper}>
+            {
+              item.results.map((child,index) => {
 
-        <View style={styles.item} key = {index}>
-          <Image source = {{uri:item.imgUrl}} style={styles.hotImg}/>
-          <Text>
-            {item.name}
-          </Text>
+                return (
+
+                  <View key = {index} style={styles.item}>
+                    <Image style={styles.pic} source={{uri: child.imgUrl}}/>
+                    <Text style={styles.brandTxt}>{child.brandName}</Text>
+                  </View>
+
+                )
+
+              })
+
+            }
+
+          </View>
         </View>
 
-        
 
       )
 
     })
 
-    const navigate = this.props.navigate
+
+
 
     return (
+      <View>
 
-      <View style={styles.hotLogo}>
-        <View style={styles.title}>
-          <Text>热门保养</Text>
-          <TouchableOpacity
-            onPress={ () => navigate('City') }>
-              <Text style={styles.hotBtn}>添加爱车</Text>
-          </TouchableOpacity>
-        </View>
+          {listItem}
 
-
-        <View style={styles.pic}>
-          {hotLogoList}
-        </View>
       </View>
-
     )
-
   }
-
 }
 
 
 var styles = StyleSheet.create({
-  hotLogo: {
-      backgroundColor:'#fff',
-      marginTop: 10
-
+  title: {
+    paddingLeft: 15,
+    paddingRight: 10
   },
-  title:{
-    flexDirection:'row',
-    alignItems:'center',
-    justifyContent:'space-between',
+  letter: {
+    lineHeight:20,
+    fontSize:12,
+    color:'#999'
+  },
+  itemWraper: {
     paddingLeft:10,
-    paddingRight:10,
-
-    height:40
-
-  },
-  pic: {
-
-    justifyContent:'space-between',
-
-    flexDirection:'row',
-
-    flexWrap: 'wrap',
-
-    width: winWidth
-
-  },
-
-  hotImg: {
-
-    width: winWidth * 0.15,
-    height: winWidth * 0.15
-
-  },
-  hotBtn: {
-    color:'#ffa028',
-    fontSize: 14
+    backgroundColor:'#fff',
   },
   item: {
-
+    flexDirection: 'row',
     alignItems:'center',
 
-    justifyContent:'center',
+    height:50,
 
-    width: winWidth * 0.25,
+    borderBottomWidth:1/ratio,
 
-    marginBottom: 10
+    borderColor:'#ececec'
+  },
+  brandTxt: {
 
+    fontSize:14,
+    paddingLeft:10
+  },
+  pic: {
+    width:30,
+    height:30
   }
 })
 
-export default HotLogo
+export default Brand

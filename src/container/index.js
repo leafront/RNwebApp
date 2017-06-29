@@ -1,9 +1,12 @@
 
+
+
 import React, { Component , PropTypes } from 'react'
 import {
   StyleSheet,
   View,
   ScrollView,
+  StatusBar,
   RefreshControl
 } from 'react-native'
 
@@ -11,6 +14,8 @@ import Swiper from 'react-native-swiper'
 
 
 import Banner from '../component/home/banner'
+
+import Loading from '../component/widget/loading'
 
 import Menu from '../component/home/menu'
 
@@ -21,6 +26,9 @@ import HotLogo from '../component/home/hotLogo'
 import Comment from '../component/home/comment'
 
 
+exports.framework = 'React';
+exports.title = '<StatusBar>';
+exports.description = 'Component for controlling the status bar';
 
 class Home extends Component {
 
@@ -29,10 +37,11 @@ class Home extends Component {
     this.state = {
       isRefreshing: false,
       comment: [],
-      page:1
+      page:1,
+      loading:true
     }
   }
-  componentWillMount() {
+  componentDidMount() {
 
     this.getComemntList(this.state.page)
 
@@ -72,7 +81,8 @@ class Home extends Component {
         var commentList = comment.concat(comment,json.result.lists)
 
         this.setState({
-          comment: commentList
+          comment: commentList,
+          loading: false
         })
        }
      }).catch((error) => {
@@ -110,30 +120,49 @@ class Home extends Component {
 
     const { navigate } = this.props.navigation
 
-    const comment = this.state.comment
+    const {comment,loading } = this.state
 
     return (
-      <ScrollView
-        refreshControl = {
-          <RefreshControl
-            refreshing={ this.state.isRefreshing }
-            onRefresh={ () => {this._onRefresh}}
-            title="加载中..."
-            colors={['#ff0000', '#00ff00', '#0000ff']}
-            progressBackgroundColor="#ffffff"
-          />
-        }
-        onScroll = { this._onScroll.bind(this) }
-        scrollEventThrottle={50}
-      >
-      <View style={styles.container}>
-        <Banner/>
-        <Menu/>
-        <Topline/>
-        <HotLogo navigate = {navigate}/>
-       <Comment comment = {comment}/>
+      <View>
+         {
+           loading ?
+
+           <Loading/> :
+
+           <View style={styles.container}>
+               <StatusBar
+                  hidden={false} //是否隐藏状态栏。
+                  animated={true} //是否需要动画效果
+                  translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
+                  backgroundColor='blue' // android 平台，设置状态栏配背景颜色
+                  barStyle="default"//可以取值 'default', 'light-content', 'dark-content'它的默认是default,
+               />
+                <ScrollView
+                  refreshControl = {
+                    <RefreshControl
+                      refreshing={ this.state.isRefreshing }
+                      onRefresh={ () => {this._onRefresh}}
+                      title="加载中..."
+                      colors={['#ff0000', '#00ff00', '#0000ff']}
+                      progressBackgroundColor="#ffffff"
+                    />
+                  }
+                  onScroll = { this._onScroll.bind(this) }
+                  scrollEventThrottle={50}
+                >
+
+                  <Banner/>
+                  <Menu/>
+                  <Topline/>
+                  <HotLogo navigate = {navigate}/>
+                  <Comment comment = {comment}/>
+                </ScrollView>
+           </View>
+         }
+
       </View>
-   </ScrollView>
+
+
     )
   }
 }
@@ -142,6 +171,7 @@ export default Home
 
 var styles = StyleSheet.create({
   container: {
-    backgroundColor:'#f4f4f8'
+    backgroundColor:'#f4f4f8',
+    marginTop:20
   }
 })
