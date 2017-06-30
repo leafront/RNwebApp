@@ -75,6 +75,8 @@ export default class City extends Component {
     const index = Math.floor(pointTop / ((winHeight - 140) / eleLen) )
 
 
+
+
     let position = parseInt(winWidth * 0.3) + 80
 
     for (let i = 0;i < index; i++ ){
@@ -82,7 +84,6 @@ export default class City extends Component {
         position += scrollHeight[i]
 
     }
-
 
     this._scrollView.scrollTo({
         y: position
@@ -165,7 +166,6 @@ export default class City extends Component {
           <Loading/> :
           <View style={styles.container}>
             <ScrollView
-              scrollEventThrottle={50}
 
               ref = { (scrollView) => { this._scrollView = scrollView } }
 
