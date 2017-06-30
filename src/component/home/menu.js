@@ -5,11 +5,13 @@ import {
   Text,
   View,
   Image,
+  PixelRatio,
   Dimensions
 } from 'react-native'
 
 const winWidth = Dimensions.get('window').width
 
+const ratio = PixelRatio.get()
 
 const Menu =  () => {
 
@@ -82,19 +84,28 @@ var styles = StyleSheet.create({
   menuWraper:{
 
     flexDirection: 'row',
+
     flexWrap: 'wrap',
+
     backgroundColor:'#fff',
+
+    width: winWidth,
+
+    paddingLeft:10,
+
+    paddingRight:10,
+
     paddingBottom:20,
   },
   menuList: {
 
-    width: winWidth * 0.2,
+    width: (winWidth - 20) * 0.2,
 
     paddingTop:20,
 
-    paddingLeft: 5,
+    alignItems:'center',
 
-    paddingRight: 5
+    justifyContent:'center'
 
   },
   meunTxt:{
@@ -107,9 +118,9 @@ var styles = StyleSheet.create({
   menuImg: {
 
     flexDirection: 'column',
-    width: winWidth * 0.2 - 10,
+    width: winWidth * 0.14,
 
-    height: winWidth * 0.2 - 10
+    height: winWidth * 0.14
   }
 })
 

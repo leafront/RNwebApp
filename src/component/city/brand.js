@@ -12,7 +12,7 @@ import {
   Alert
 } from 'react-native'
 
-const winWidth = Dimensions.get('window').width
+
 
 const ratio = PixelRatio.get()
 
@@ -52,6 +52,17 @@ class Brand extends Component {
       ]
     }
   }
+
+  renderBrand (child,index) {
+    return (
+
+      <View key = {index} style={styles.item}>
+        <Image style={styles.pic} source={{uri: child.imgUrl}}/>
+        <Text style={styles.brandTxt}>{child.brandName}</Text>
+      </View>
+
+    )
+  }
   render() {
 
     const hotLogo = this.state.hotLogo
@@ -68,22 +79,7 @@ class Brand extends Component {
             <Text style={styles.letter}>{item.pinYin}</Text>
           </View>
           <View style={styles.itemWraper}>
-            {
-              item.results.map((child,index) => {
-
-                return (
-
-                  <View key = {index} style={styles.item}>
-                    <Image style={styles.pic} source={{uri: child.imgUrl}}/>
-                    <Text style={styles.brandTxt}>{child.brandName}</Text>
-                  </View>
-
-                )
-
-              })
-
-            }
-
+            {item.results.map((child,i) => this.renderBrand(child,i))}
           </View>
         </View>
 
@@ -91,14 +87,12 @@ class Brand extends Component {
       )
 
     })
-
-
-
-
     return (
       <View>
 
           {listItem}
+
+
 
       </View>
     )

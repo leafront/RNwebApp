@@ -7,11 +7,14 @@ import {
   Button,
   Image,
   Dimensions,
+  PixelRatio,
   TouchableOpacity,
   Alert
 } from 'react-native'
 
 const winWidth = Dimensions.get('window').width
+
+const ratio = PixelRatio.get()
 
 class HotLogo extends Component {
   constructor(props) {
@@ -59,7 +62,7 @@ class HotLogo extends Component {
 
         <View style={styles.item} key = {index}>
           <Image source = {{uri:item.imgUrl}} style={styles.hotImg}/>
-          <Text>
+          <Text style={styles.nameTxt}>
             {item.name}
           </Text>
         </View>
@@ -99,31 +102,39 @@ var styles = StyleSheet.create({
   },
   pic: {
 
-    justifyContent:'space-between',
 
     flexDirection:'row',
 
     flexWrap: 'wrap',
 
+    backgroundColor:'#fff',
+
     width: winWidth,
 
-    backgroundColor:'#fff'
+
+    paddingLeft:10/ratio,
+
+    paddingRight:10/ratio
 
   },
 
   hotImg: {
-
     width: winWidth * 0.15,
+
+
     height: winWidth * 0.15
 
   },
+  nameTxt: {
+    height:20,
+    color:'#333'
+  },
   item: {
+    width: (winWidth - 20) * 0.25,
 
     alignItems:'center',
 
     justifyContent:'center',
-
-    width: winWidth * 0.25,
 
     marginBottom: 10
 

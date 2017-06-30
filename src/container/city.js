@@ -4,9 +4,12 @@ import {
   Text,
   Image,
   ScrollView,
+  Dimensions,
   TouchableOpacity,
+  PanResponder,
   View
 } from 'react-native'
+
 
 
 import HotLogo from '../component/city/hotLogo'
@@ -16,6 +19,7 @@ import Brand from '../component/city/brand'
 
 import Loading from '../component/widget/loading'
 
+const {height: winHeight, width: winWidth } = Dimensions.get('window')
 
 export default class City extends Component {
 
@@ -30,6 +34,7 @@ export default class City extends Component {
     }
 
   }
+
   static navigationOptions = ({navigation})=>({
     title: '选品牌',
     headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
@@ -42,12 +47,68 @@ export default class City extends Component {
       height:54
     }
   })
+  componentWillMount(){
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: ()=> true,
+      onPanResponderMove: (evt,gs)=>{
 
-  componentWillMount() {
+        this.scollIntoView(gs.moveY)
+
+      },
+      onPanResponderRelease: (evt,gs) =>{
+
+        this.scollIntoView(gs.moveY)
+
+      }
+    })
+  }
+
+  scollIntoView(pageY) {
+
+    const pointTop = parseInt(pageY)  - 94
+
+    const { brandList, scrollHeight } = this.state
+
+    const eleLen = brandList.length
+
+    const index = Math.floor(pointTop / ((winHeight - 140) / eleLen) )
+
+
+    let position = parseInt(winWidth * 0.3) + 80
+
+    for (let i = 0;i < index; i++ ){
+
+        position += scrollHeight[i]
+
+    }
+
+
+    this._scrollView.scrollTo({
+        y: position
+    })
+  }
+  getScrollHeight(brandList) {
+
+    let height = []
+
+    brandList.forEach((item) => {
+
+      var eachHeight = 20 + item.results.length * 50
+
+      height.push(eachHeight)
+
+    })
+
+    this.setState({scrollHeight: height })
+  }
+  componentDidMount() {
 
     this.getBrandList()
 
   }
+
+
 
   getBrandList () {
     fetch(
@@ -76,6 +137,9 @@ export default class City extends Component {
           brandList: json.result,
           loading: false
         })
+
+        this.getScrollHeight(json.result)
+
        }
      }).catch((error) => {
        console.error(error)
@@ -86,8 +150,13 @@ export default class City extends Component {
 
     const { navigate } = this.props.navigation
 
-    const loading = this.state.loading
+    const { loading, brandList } = this.state
 
+    const letterNav = brandList.map((item,index) => {
+      return (
+        <View key = {index } style ={styles.letterNav}><Text onPress = {(event) => {this.scollIntoView(event.nativeEvent.pageY)} } style={styles.txt}>{item.pinYin}</Text></View>
+      )
+    })
     return (
       <View>
         {
@@ -95,13 +164,27 @@ export default class City extends Component {
 
           <Loading/> :
           <View style={styles.container}>
-            <ScrollView>
+            <ScrollView
+              scrollEventThrottle={50}
+
+              ref = { (scrollView) => { this._scrollView = scrollView } }
+
+            >
 
               <HotLogo navigate = {navigate}/>
-              <Brand navigate = {navigate} brandList = {this.state.brandList}/>
+
+
+
+              <Brand navigate = {navigate} brandList = {brandList}/>
 
             </ScrollView>
+            <View style={styles.letterWraper} {...this._panResponder.panHandlers} >
 
+
+              { letterNav }
+
+
+            </View>
           </View>
        }
       </View>
@@ -114,5 +197,29 @@ export default class City extends Component {
 const styles = StyleSheet.create({
   container: {
     backgroundColor:'#f4f4f8'
+  },
+  letterWraper: {
+    position:'absolute',
+    right:0,
+    top: 40,
+    width:30,
+    bottom:100,
+    height: winHeight - 140
+  },
+  letterNav: {
+
+      flexDirection:'column',
+
+      backgroundColor: 'transparent',
+
+      alignItems:'center',
+
+      justifyContent:'center',
+      flex:1
+  },
+  txt: {
+    fontSize:14,
+
+    color:'#333'
   }
 })

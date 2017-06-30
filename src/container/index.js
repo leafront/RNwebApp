@@ -26,10 +26,6 @@ import HotLogo from '../component/home/hotLogo'
 import Comment from '../component/home/comment'
 
 
-exports.framework = 'React';
-exports.title = '<StatusBar>';
-exports.description = 'Component for controlling the status bar';
-
 class Home extends Component {
 
   constructor(props) {
