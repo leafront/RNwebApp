@@ -66,13 +66,13 @@ export default class City extends Component {
 
   scollIntoView(pageY) {
 
-    const pointTop = parseInt(pageY)  - 94
+    const pointTop = parseInt(pageY)  - 194
 
     const { brandList, scrollHeight } = this.state
 
     const eleLen = brandList.length
 
-    const index = Math.floor(pointTop / ((winHeight - 140) / eleLen) )
+    const index = Math.floor(pointTop / ((winHeight - 340) / eleLen) )
 
 
 
@@ -169,6 +169,7 @@ export default class City extends Component {
 
               ref = { (scrollView) => { this._scrollView = scrollView } }
 
+
             >
 
               <HotLogo navigate = {navigate}/>
@@ -201,10 +202,10 @@ const styles = StyleSheet.create({
   letterWraper: {
     position:'absolute',
     right:0,
-    top: 40,
+    top: 140,
     width:30,
-    bottom:100,
-    height: winHeight - 140
+    bottom:200,
+    height: winHeight - 340
   },
   letterNav: {
 
