@@ -46,7 +46,7 @@ class Comment extends Component {
   render () {
 
     const comment = this.props.comment
-    
+
     const commentItem = comment.map((item,index) => {
 
       return (
@@ -67,7 +67,7 @@ class Comment extends Component {
             <Text style={styles.redText}>（省¥{item.savePrice}）</Text>
           </View>
 
-          <Text style={styles.infoDes}>/{item.content}</Text>
+          <Text style={styles.infoDes}>{item.content}</Text>
           <PicItem item = {item.pictures}/>
         </View>
       )
