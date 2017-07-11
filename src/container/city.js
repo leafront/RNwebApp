@@ -16,6 +16,8 @@ import HotLogo from '../component/city/hotLogo'
 
 import Brand from '../component/city/brand'
 
+import CarType from '../component/city/carType'
+
 
 import Loading from '../component/widget/loading'
 
@@ -30,7 +32,9 @@ export default class City extends Component {
     this.state = {
 
       brandList: [],
-      loading: true
+      loading: true,
+      carTypeList:[],
+      brandId: ''
     }
 
   }
@@ -66,13 +70,13 @@ export default class City extends Component {
 
   scollIntoView(pageY) {
 
-    const pointTop = parseInt(pageY)  - 194
+    const pointTop = parseInt(pageY)  - 124
 
     const { brandList, scrollHeight } = this.state
 
     const eleLen = brandList.length
 
-    const index = Math.floor(pointTop / ((winHeight - 340) / eleLen) )
+    const index = Math.floor(pointTop / ((winHeight - 170) / eleLen) )
 
 
 
@@ -109,7 +113,41 @@ export default class City extends Component {
 
   }
 
+  getCarType (id) {
+    fetch(
+      'https://m.lechebang.com/gateway/car/getBrandProducerCar' , {
+       method: 'POST',
+       headers: {
+         'Content-Type':'application/x-www-form-urlencoded'
+       },
+       body: JSON.stringify({
+         "serviceType":1,
+         "brandId": id,
+         "cityId":10201,
+         "appCode":101,
+         "lcb_client_id":"4b1a5e1f-c146-46ca-9189-41cbf0827f26",
+         "lcb_request_id":"11dc84af-a7f8-440e-af65-658297aedc5a",
+         "lcb_h5_v":"4.0.2"
+       })
+     })
+     .then((response) => {
+       if (response.ok) {
+           return response.json();
+       }
+     }).then((json) => {
 
+       if(json && json.msg == "ok"){
+        this.setState({
+          carTypeList: json.result
+        })
+
+
+
+       }
+     }).catch((error) => {
+       console.error(error)
+     })
+  }
 
   getBrandList () {
     fetch(
@@ -151,7 +189,7 @@ export default class City extends Component {
 
     const { navigate } = this.props.navigation
 
-    const { loading, brandList } = this.state
+    const { loading, brandList, carTypeList } = this.state
 
     const letterNav = brandList.map((item,index) => {
       return (
@@ -164,29 +202,37 @@ export default class City extends Component {
           loading ?
 
           <Loading/> :
-          <View style={styles.container}>
-            <ScrollView
-
-              ref = { (scrollView) => { this._scrollView = scrollView } }
-
-
-            >
-
-              <HotLogo navigate = {navigate}/>
+          <View>
+            <View style={styles.container}>
+              <ScrollView
+                ref = { (scrollView) => { this._scrollView = scrollView } }
 
 
+              >
 
-              <Brand navigate = {navigate} brandList = {brandList}/>
-
-            </ScrollView>
-            <View style={styles.letterWraper} {...this._panResponder.panHandlers} >
-
-
-              { letterNav }
+                <HotLogo/>
+                <Brand navigate = {navigate} brandList = {brandList} getCarType = { this.getCarType.bind(this) }/>
+              </ScrollView>
 
 
-            </View>
+              <View style={styles.letterWraper} {...this._panResponder.panHandlers} >
+
+
+                { letterNav }
+
+
+              </View>
+
+           </View>
+           <View>
+             <ScrollView>
+
+                 <CarType carTypeList = {carTypeList}/>
+
+             </ScrollView>
           </View>
+        </View>
+
        }
       </View>
     )
@@ -202,10 +248,10 @@ const styles = StyleSheet.create({
   letterWraper: {
     position:'absolute',
     right:0,
-    top: 140,
+    top: 70,
     width:30,
-    bottom:200,
-    height: winHeight - 340
+    bottom:100,
+    height: winHeight - 170
   },
   letterNav: {
 
