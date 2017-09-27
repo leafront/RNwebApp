@@ -20,7 +20,6 @@ const ratio = PixelRatio.get()
 class Brand extends Component {
   constructor(props) {
     super(props)
-
     this.state = {
       hotLogo: [{
           name:'奥迪',
@@ -52,14 +51,24 @@ class Brand extends Component {
       ]
     }
   }
-
+  openCarType (id) {
+    this.props.getCarType(id)
+  }
   renderBrand (child,index) {
+
+    const navigate = this.props.navigate
     return (
 
-      <View key = {index} style={styles.item}>
-        <Image style={styles.pic} source={{uri: child.imgUrl}}/>
-        <Text style={styles.brandTxt}>{child.brandName}</Text>
+        <TouchableOpacity  key = {index}
+          onPress={ () => this.openCarType(child.id) }>
+          <View style={styles.item}>
+
+          <Image style={styles.pic} source={{uri: child.imgUrl}}/>
+          <Text style={styles.brandTxt}>{child.brandName}</Text>
+
       </View>
+    </TouchableOpacity>
+
 
     )
   }
@@ -91,8 +100,6 @@ class Brand extends Component {
       <View>
 
           {listItem}
-
-
 
       </View>
     )
