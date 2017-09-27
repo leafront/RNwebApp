@@ -19,10 +19,7 @@ const RNwebApp = StackNavigator({
 
   Home: { screen: Home },
   City: { screen: City }
-
-
-
-
+	
 })
 
 

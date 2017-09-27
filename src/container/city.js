@@ -7,6 +7,8 @@ import {
   Dimensions,
   TouchableOpacity,
   PanResponder,
+	Platform,
+	StatusBar,
   View
 } from 'react-native'
 
@@ -34,17 +36,17 @@ export default class City extends Component {
     }
 
   }
-
   static navigationOptions = ({navigation})=>({
     title: '选品牌',
-    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
+    headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{marginTop:Platform.OS === 'ios' ? 0 : 20,height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
     headerTitleStyle: {
       color: '#333',
-      fontSize: 16
+      fontSize: 16,
+			marginTop:Platform.OS === 'ios' ? 0 : 20
     },
     headerStyle: {
-      backgroundColor:'#fff',
-      height:54
+    	height:64,
+      backgroundColor:'white'
     }
   })
   componentWillMount(){
@@ -165,6 +167,13 @@ export default class City extends Component {
 
           <Loading/> :
           <View style={styles.container}>
+						<StatusBar
+							hidden={false} //是否隐藏状态栏。
+							animated={true} //是否需要动画效果
+							translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
+							backgroundColor="white" // android 平台，设置状态栏配背景颜色
+							barStyle="dark-content"//可以取值 'default', 'light-content', 'dark-content'它的默认是default,
+						/>
             <ScrollView
 
               ref = { (scrollView) => { this._scrollView = scrollView } }

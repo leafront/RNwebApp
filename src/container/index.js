@@ -130,8 +130,8 @@ class Home extends Component {
                   hidden={false} //是否隐藏状态栏。
                   animated={true} //是否需要动画效果
                   translucent={true} //android平台，是否有半透明效果,如果为true,状态栏会浮在下面的布局上面，
-                  backgroundColor='blue' // android 平台，设置状态栏配背景颜色
-                  barStyle="default"//可以取值 'default', 'light-content', 'dark-content'它的默认是default,
+                  backgroundColor="white" // android 平台，设置状态栏配背景颜色
+                  barStyle="dark-content"//可以取值 'default', 'light-content', 'dark-content'它的默认是default,
                />
                 <ScrollView
                   refreshControl = {

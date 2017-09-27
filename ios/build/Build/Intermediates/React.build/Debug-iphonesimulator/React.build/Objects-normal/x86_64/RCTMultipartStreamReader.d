@@ -1,3 +1,3 @@
 dependencies: \
-  /Users/tiger/Desktop/RNwebApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
-  /Users/tiger/Desktop/RNwebApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h
+  /Users/leafrontye/Desktop/RNwebApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.m \
+  /Users/leafrontye/Desktop/RNwebApp/node_modules/react-native/React/Base/RCTMultipartStreamReader.h

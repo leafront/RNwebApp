@@ -33,7 +33,6 @@ const Menu =  () => {
         "name":'加油',
         "imgUrl": 'https://ocpvgmewj.qnssl.com/d2e91ea8-8180-485a-a23f-96e7e6cbd589.png',
       },
-
         {
           "name":'洗车',
           "imgUrl": 'https://ocpvgmewj.qnssl.com/4a3bfbc2-e230-483f-b5e9-81d92c50f5cb.png',
@@ -58,7 +57,7 @@ const Menu =  () => {
 
       return (
           <View style={styles.menuList} key = {index}>
-           <Image source={{url:item.imgUrl}} style={styles.menuImg}/>
+           <Image source={{uri:item.imgUrl}} style={styles.menuImg}/>
            <Text style={styles.meunTxt}>
              {item.name}
            </Text>
