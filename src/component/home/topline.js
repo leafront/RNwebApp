@@ -18,7 +18,7 @@ const Topline = () => {
   return (
 
     <View style={styles.topLine}>
-      <Image style = {styles.topLineImg} source={{uri:'https://img06.lechebangstatic.com/webapp/homemiddle2b2191952c.png'}} />
+      <Image style = {styles.topLineImg} source={require('../../images/top_line.png')}  />
 
       <View>
           <Text style = {styles.scrollTxt}>从7月1日起，如果你的车逾期未年审，就要重新考试了！</Text>
@@ -29,22 +29,22 @@ const Topline = () => {
 
 var styles = StyleSheet.create({
   topLine: {
+  	paddingLeft:10,
+		paddingRight:10,
     height: 40,
     borderTopWidth: 1/ratio,
     borderColor: '#f1f1f1',
+		alignItems:'center',
     flexDirection: 'row',
     backgroundColor:'#fff'
   },
   topLineImg:{
-    width:35,
-    height:25
-
+    width:30,
+    height:15
   },
   scrollTxt: {
-    textAlign: 'center',
-    lineHeight:40,
     fontSize:11,
-    paddingRight:10
+		marginLeft:20
   }
 })
 

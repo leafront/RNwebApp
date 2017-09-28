@@ -38,11 +38,11 @@ export default class City extends Component {
 	}
 	static navigationOptions = ({navigation})=>({
 		title: '选品牌',
-		headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{marginTop:Platform.OS === 'ios' ? 0 : 20,height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
+		headerLeft: <TouchableOpacity onPress={ () => { navigation.goBack() } } ><Image source={require('../images/back.png')} style = {{height: 25,width:25,marginLeft:10}}/></TouchableOpacity>,
 		headerTitleStyle: {
 			color: '#333',
 			fontSize: 16,
-			marginTop:Platform.OS === 'ios' ? 0 : 20
+
 		},
 		headerStyle: {
 			height:64,
@@ -78,7 +78,6 @@ export default class City extends Component {
 
 
 
-
 		let position = parseInt(winWidth * 0.3) + 80
 
 		for (let i = 0;i < index; i++ ){
@@ -88,7 +87,8 @@ export default class City extends Component {
 		}
 
 		this._scrollView.scrollTo({
-			y: position
+			y: position,
+			animated: false
 		})
 	}
 	getScrollHeight(brandList) {
@@ -157,7 +157,9 @@ export default class City extends Component {
 
 		const letterNav = brandList.map((item,index) => {
 			return (
-				<View key = {index } style ={styles.letterNav}><Text onPress = {(event) => {this.scollIntoView(event.nativeEvent.pageY)} } style={styles.txt}>{item.pinYin}</Text></View>
+				<View key = {index } style ={styles.letterNav}>
+					<Text onPress = {(event) => {this.scollIntoView(event.nativeEvent.pageY)} } style={styles.txt}>{item.pinYin}</Text>
+				</View>
 			)
 		})
 		return (
@@ -175,6 +177,8 @@ export default class City extends Component {
 								barStyle="dark-content"//可以取值 'default', 'light-content', 'dark-content'它的默认是default,
 							/>
 							<ScrollView
+
+								iosbounces = {false}
 
 								ref = { (scrollView) => { this._scrollView = scrollView } }
 

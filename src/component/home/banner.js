@@ -89,7 +89,7 @@ export default Banner
 
 var styles = StyleSheet.create({
   pagination: {
-    top:120
+		bottom:10
   },
   wrapper: {
     height: 130,
